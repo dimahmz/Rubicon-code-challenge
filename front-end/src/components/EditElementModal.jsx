@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { BiPlus } from "react-icons/bi";
+import { setOpenEditModal } from "../store/projectsSice";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   Modal,
@@ -12,45 +13,55 @@ import {
   FormGroup,
   Spinner,
 } from "reactstrap";
+import { getYearMonthDay } from "../utils/time";
 
-function CreateElementModal({ children, onSubmitForm }) {
-  const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
+function CreateElementModal({ children, onSubmitForm, selectedElement }) {
+  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const close = () => dispatch(setOpenEditModal(false));
+
+  const open = useSelector((store) => store.projects.openEditModal);
+
   async function submitForm(e) {
     e.preventDefault();
+
     const label = e.target.label.value;
     const description = e.target.description.value;
     const starting_date = e.target.started_at.value;
     const ending_date = e.target.ended_at.value;
 
     setIsLoading(true);
+
     const response = await onSubmitForm({
-      label,
-      description,
-      starting_date,
-      ending_date,
+      id: selectedElement._id,
+      project: {
+        label,
+        description,
+        starting_date,
+        ending_date,
+      },
     });
+
     setIsLoading(false);
 
-    if (response.success) toggle();
+    if (response.success) close();
   }
   return (
     <div>
-      <Button color="danger" onClick={toggle}>
-        <BiPlus />
-        add Project
-      </Button>
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>header</ModalHeader>
+      <Modal isOpen={open} toggle={close}>
+        <ModalHeader toggle={close}>header</ModalHeader>
         <ModalBody>
           <Form onSubmit={submitForm}>
             <FormGroup>
               <Label for="label">Valid input</Label>
-              <Input required name="label" placeholder="Write a label..." />
+              <Input
+                required
+                name="label"
+                placeholder="Write a label..."
+                defaultValue={selectedElement?.label}
+              />
             </FormGroup>
             <FormGroup>
               <Label for="description">Description</Label>
@@ -60,6 +71,7 @@ function CreateElementModal({ children, onSubmitForm }) {
                 name="description"
                 type="textarea"
                 placeholder="Write a description..."
+                defaultValue={selectedElement?.description}
               />
             </FormGroup>
             {children}
@@ -71,6 +83,7 @@ function CreateElementModal({ children, onSubmitForm }) {
                 name="started_at"
                 placeholder="pick a date..."
                 type="date"
+                defaultValue={getYearMonthDay(selectedElement?.starting_date)}
               />
             </FormGroup>
             <FormGroup>
@@ -81,14 +94,15 @@ function CreateElementModal({ children, onSubmitForm }) {
                 name="ended_at"
                 placeholder="pick a date..."
                 type="date"
+                defaultValue={getYearMonthDay(selectedElement?.ending_date)}
               />
             </FormGroup>
             <ModalFooter>
               <Button color="primary" type="submit">
                 {isLoading && <Spinner size="sm">Loading...</Spinner>}
-                <span>&nbsp;Save</span>
+                <span>&nbsp; Save</span>
               </Button>
-              <Button color="secondary" onClick={toggle}>
+              <Button color="secondary" onClick={close}>
                 Cancel
               </Button>
             </ModalFooter>

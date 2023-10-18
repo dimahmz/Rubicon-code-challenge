@@ -21,28 +21,26 @@ class ProjectController {
     }
   }
   static async update(req, res) {
-    const { label, description, starting_date, ending_date, status } = req.body;
+    const { label, description, starting_date, ending_date } = req.body;
     try {
-      const $project = await Project.replaceOne(
+      const $project = await Project.findByIdAndUpdate(
+        req.params.id,
         {
-          _id: req.params.id,
+          label,
+          description,
+          starting_date,
+          ending_date,
         },
-        {
-          label,
-          description,
-          starting_date,
-          ending_date,
-          status,
-        }
+        { new: true }
       );
+      console.log($project);
+      if (!$project) {
+        return res
+          .status(404)
+          .send(Responses.create(false, "project doesn't exist"));
+      }
       res.send(
-        Responses.create(true, "Project has been created", "", {
-          label,
-          description,
-          starting_date,
-          ending_date,
-          status,
-        })
+        Responses.create(true, "Project has been updated", "", $project)
       );
     } catch (e) {
       console.error(e.message);
