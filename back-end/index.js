@@ -1,14 +1,16 @@
+require("dotenv").config();
 const Express = require("express");
 const app = Express();
-require("dotenv").config();
-const connectToDataBase = require("./database/connection");
 const projectRoutes = require("./routes/project");
 const taskRoutes = require("./routes/task");
+const cors = require("cors");
+const connectToDataBase = require("./database/connection");
 
 const notFound = require("./routes/notFound");
 
 // middlewares
 app.use(Express.json());
+app.use(cors());
 
 // routes
 app.use("/projects", projectRoutes);
