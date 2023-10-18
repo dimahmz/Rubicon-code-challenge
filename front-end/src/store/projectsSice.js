@@ -4,6 +4,7 @@ export const ProjectsSlice = createSlice({
   name: "projects",
   initialState: {
     projects: [],
+    errorResponse: { title: "", openModal: false, description: "" },
   },
   reducers: {
     addElement: (state, action) => {
@@ -22,11 +23,15 @@ export const ProjectsSlice = createSlice({
       state.projects.splice(index, id);
     },
     setTable: (state, action) => {
-      const $projects = action.paylaod;
+      const $projects = action.payload;
       state.projects = $projects;
     },
     emptyTable: (state) => {
       state.projects = [];
+    },
+
+    setErrorResponse: (state, action) => {
+      state.errorResponse = action.payload;
     },
   },
 });
@@ -38,6 +43,7 @@ export const {
   deleteElement,
   setTable,
   emptyTable,
+  setErrorResponse,
 } = ProjectsSlice.actions;
 
 export default ProjectsSlice.reducer;

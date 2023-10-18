@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 function HomePage() {
   return (
     <>
-      <h1>The coding challenge has been completed</h1>
-      <p>click here to see it</p>
+      <h1>Rubicon Conding challenge</h1>
+      <p>The coding challenge has been completed</p>
+      <p>click on the button to explore it</p>
       <div>
         <Link to="/projects">
-          <button>click</button>
+          <button>Explore</button>
         </Link>
       </div>
     </>
