@@ -1,5 +1,5 @@
 class Responses {
-  static create(success = true, title = "", description = "", payload = []) {
+  static create(success = true, title = "", description = "", payload = null) {
     const response = {
       success,
       title,

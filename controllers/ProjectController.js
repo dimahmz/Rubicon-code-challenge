@@ -4,7 +4,6 @@ const { Project } = require("../models/project");
 class ProjectController {
   static async create(req, res) {
     const { label, description, starting_date, ending_date, status } = req.body;
-    console.log(label);
     try {
       const $project = await Project.create({
         label,
@@ -53,9 +52,13 @@ class ProjectController {
 
   static async delete(req, res) {
     try {
-      const deleted = await Project.findOneAndDelete({
+      const $project = await Project.findOneAndDelete({
         _id: req.params.id,
       });
+      if (!$project)
+        return res
+          .status(400)
+          .send(Responses.create(false, "Project doesn't exist"));
       res.send(Responses.create(true, "Project has been deleted"));
     } catch (e) {
       console.error(e.message);
