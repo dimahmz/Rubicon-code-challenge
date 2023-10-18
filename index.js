@@ -8,7 +8,10 @@ const notFound = require("./routes/notFound");
 // middlewares
 app.use(Express.json());
 
-// not found route
+// routes
+app.use("/projects", projectRoutes);
+
+// not found routes
 app.use(notFound);
 
 // starting the app
