@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const Joi = require("joi");
 
 const ProjectSchema = new Schema(
   {
@@ -28,4 +29,17 @@ const ProjectSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = ProjectSchema;
+const Project = mongoose.model("Project", ProjectSchema);
+
+function validate(project) {
+  const schema = Joi.object({
+    label: Joi.string().max(255).required().label("label"),
+    description: Joi.string().required().label("label"),
+    status: Joi.string().required().max(255).label("status"),
+    ending_date: Joi.date().required().label("ending date"),
+    starting_date: Joi.date().required().label("starting date"),
+  });
+  return schema.validate(project);
+}
+
+module.exports = { Project, ProjectSchema, validate };
