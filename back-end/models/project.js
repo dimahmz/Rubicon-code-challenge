@@ -13,11 +13,6 @@ const ProjectSchema = new Schema(
       default: "",
     },
 
-    status: {
-      type: String,
-      default: "",
-    },
-
     ending_date: {
       type: Date,
     },
@@ -35,7 +30,6 @@ function validate(project) {
   const schema = Joi.object({
     label: Joi.string().max(255).required().label("label"),
     description: Joi.string().required().label("label"),
-    status: Joi.string().required().max(255).label("status"),
     ending_date: Joi.date().required().label("ending date"),
     starting_date: Joi.date().required().label("starting date"),
   });
