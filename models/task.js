@@ -1,3 +1,4 @@
+const Joi = require("joi");
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
@@ -7,29 +8,34 @@ const TaskSchema = new Schema(
       type: String,
       default: "",
     },
-
     description: {
       type: String,
       default: "",
     },
-
-    status: {
-      type: String,
-      default: "in Progress",
-    },
-
-    ending_date: {
-      type: Date,
-    },
-
     starting_date: {
       type: Date,
       default: false,
     },
+    ending_date: {
+      type: Date,
+    },
+
+    project: { type: Schema.Types.ObjectId, ref: "Project" },
   },
   { timestamps: true }
 );
 
-module.exports = TaskSchema;
+const Task = mongoose.model("Task", TaskSchema);
 
-// projects: [{ type: Schema.Types.objectId, ref: "Project" }],
+function validate(project) {
+  const schema = Joi.object({
+    label: Joi.string().max(255).required().label("label"),
+    description: Joi.string().required().label("description"),
+    ending_date: Joi.date().required().label("ending date"),
+    starting_date: Joi.date().required().label("starting date"),
+    project_id: Joi.string().required().label("project id"),
+  });
+  return schema.validate(project);
+}
+
+module.exports = { TaskSchema, Task, validate };
