@@ -5,14 +5,14 @@ import CreateElementModal from "../components/CreatElementModal";
 import ConfirmDeleteModal from "../components/confirmDeleteModal";
 import ErrorModal from "../components/ErrorModal";
 import EditElementModal from "../components/EditElementModal";
-import Project from "../utils/APIs";
+import Project from "../utils/APIs/Project";
 import {
   addElement,
   deleteElement,
   updateElement,
   setTable,
   setErrorResponse,
-} from "../store/projectsSice";
+} from "../store/projectsSlice";
 import ProjectsTable from "../components/ProjectsTable";
 import AddProjectHeader from "../components/addProjectHeader";
 
@@ -22,6 +22,8 @@ function ProjectsPage() {
   const [isloading, setIsLoading] = useState(false);
 
   const projects = useSelector((store) => store.projects.projects);
+
+  const tasks = useSelector((store) => store.tasks.tasks);
 
   const selectedProject = useSelector(
     (store) => store.projects.selectedProject
@@ -41,7 +43,7 @@ function ProjectsPage() {
 
   useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [tasks]);
 
   async function handleCreateProject(newProject) {
     const response = await Project.createProject(newProject);
@@ -62,7 +64,7 @@ function ProjectsPage() {
   async function handleUpdateProject(editedProject) {
     const response = await Project.updateProject(editedProject);
     if (response.success) {
-      dispatch(updateElement(editedProject));
+      dispatch(updateElement(response.payload));
     } else {
       dispatch(
         setErrorResponse({
@@ -89,6 +91,7 @@ function ProjectsPage() {
         <CreateElementModal
           onSubmitForm={handleCreateProject}
           CustomHeader={AddProjectHeader}
+          btnLabel="Add Project"
         />
       </div>
       <ErrorModal />

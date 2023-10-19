@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { setOpenEditModal } from "../store/projectsSice";
+import { setOpenEditModal } from "../store/appSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -14,6 +13,7 @@ import {
   Spinner,
 } from "reactstrap";
 import { getYearMonthDay } from "../utils/time";
+import Button from "../components/Button";
 
 function CreateElementModal({ children, onSubmitForm, selectedElement }) {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ function CreateElementModal({ children, onSubmitForm, selectedElement }) {
 
   const close = () => dispatch(setOpenEditModal(false));
 
-  const open = useSelector((store) => store.projects.openEditModal);
+  const open = useSelector((store) => store.app.openEditModal);
 
   async function submitForm(e) {
     e.preventDefault();
@@ -36,7 +36,7 @@ function CreateElementModal({ children, onSubmitForm, selectedElement }) {
 
     const response = await onSubmitForm({
       id: selectedElement._id,
-      project: {
+      element: {
         label,
         description,
         starting_date,
@@ -72,6 +72,8 @@ function CreateElementModal({ children, onSubmitForm, selectedElement }) {
                 type="textarea"
                 placeholder="Write a description..."
                 defaultValue={selectedElement?.description}
+                rows={5}
+                cols={10}
               />
             </FormGroup>
             {children}
@@ -98,12 +100,12 @@ function CreateElementModal({ children, onSubmitForm, selectedElement }) {
               />
             </FormGroup>
             <ModalFooter>
-              <Button color="primary" type="submit">
+              <Button type="cancel" color="secondary" onClick={close}>
+                Cancel
+              </Button>
+              <Button type="submit">
                 {isLoading && <Spinner size="sm">Loading...</Spinner>}
                 <span>&nbsp; Save</span>
-              </Button>
-              <Button color="secondary" onClick={close}>
-                Cancel
               </Button>
             </ModalFooter>
           </Form>

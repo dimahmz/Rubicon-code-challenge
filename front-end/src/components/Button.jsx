@@ -1,7 +1,7 @@
 import { Button } from "reactstrap";
-export default function AppButton({ label, props, children, onClick }) {
+export default function AppButton({ label, children, onClick, ...props }) {
   return (
-    <Button className="app-button" {...props} onClick={onClick}>
+    <Button {...props} className="app-button" onClick={onClick}>
       {children}
       {label}
     </Button>

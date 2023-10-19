@@ -8,7 +8,7 @@ export default function AddProjectHeader({ closeModal }) {
           <AiFillFlag />
         </div>
         <div className="titles">
-          <h4>Add New Project</h4>
+          <h2>Add New Project</h2>
           <p>Fill your project attributs</p>
         </div>
       </div>

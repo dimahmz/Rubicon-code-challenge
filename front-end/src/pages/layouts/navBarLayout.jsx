@@ -16,7 +16,7 @@ function NavBarLayout() {
           to="tasks"
           className={({ isActive }) => (isActive ? "activeLink" : "")}
         >
-          <Button style={{ padding: "20px" }} label="Tasks" />
+          <Button label="Tasks" />
         </NavLink>
       </nav>
       <section>

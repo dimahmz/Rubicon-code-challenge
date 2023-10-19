@@ -1,13 +1,22 @@
-.header-modal {
+.modal-header {
   display: flex;
   justify-content: space-between;
-  padding: 30px;
+  align-items: start;
+  padding: 30px 20px 0;
+  svg {
+    font-size: 30px;
+  }
   .modal-title {
     display: flex;
+    align-items: start;
     column-gap: 10px;
   }
   .titles {
+    flex-direction: column;
     display: flex;
-    row-gap: 5px;
   }
+}
+
+label {
+  font-weight: 500;
 }

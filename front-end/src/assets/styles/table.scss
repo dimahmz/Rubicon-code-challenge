@@ -1,18 +1,32 @@
 @import "variables";
 
-#data-table {
+table.data-table {
   max-width: $table-max-w;
   margin: 50px auto;
   border-collapse: separate;
   border-spacing: 0 10px;
   color: $sm-text-color !important;
   font-size: 14px;
-
+  tr {
+    border-radius: 5px;
+    box-shadow: $table-row-shadow;
+    background-color: transparent;
+  }
   .table-header {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  th {
+    text-align: start;
     color: $sm-text-color !important;
     background-color: transparent !important;
+    font-size: 16px;
+    font-weight: 500;
   }
-
+  td {
+    color: #0f0d0d;
+    font-weight: 500;
+  }
   .description {
     word-wrap: break-word;
     max-width: 400px;
@@ -22,24 +36,27 @@
     max-width: 100px;
   }
   .updated-at {
+    max-width: 100px;
     text-align: center;
     border-radius: 7px;
     background-color: #ffd587;
   }
   .created-at {
+    max-width: 100px;
     text-align: center;
     border-radius: 7px;
     background-color: #6db1fc;
   }
-  .project-date {
+  .element-date {
     display: flex;
     align-items: center;
     column-gap: 10px;
+    color: $sm-text-color;
   }
 
   .action-icons-container {
     display: flex;
-    justify-content: space-between;
+    column-gap: 10px;
     align-items: center;
     svg {
       font-size: 20px;

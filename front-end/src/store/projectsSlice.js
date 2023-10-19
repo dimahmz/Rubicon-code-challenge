@@ -11,7 +11,6 @@ export const ProjectsSlice = createSlice({
       _id: "",
       label: "",
       description: "",
-      status: "",
       ending_date: "",
       starting_date: "",
       createdAt: "",
@@ -29,7 +28,6 @@ export const ProjectsSlice = createSlice({
         if (project._id == $id) return editedProject;
         return project;
       });
-      console.log(state.projects);
     },
     deleteElement: (state, action) => {
       const $project = action.payload;
@@ -45,20 +43,17 @@ export const ProjectsSlice = createSlice({
     emptyTable: (state) => {
       state.projects = [];
     },
-    setSelectedElement: (state, action) => {
-      state.selectedElement = action.payload;
+    setSelectedProject: (state, action) => {
+      state.selectedProject = action.payload;
     },
-
     setErrorResponse: (state, action) => {
       state.errorResponse = action.payload;
     },
     setOpenDeleteModal: (state, action) => {
-      state.openDeleteModal = action.payload.open;
-      state.selectedProject = action.payload.project;
+      state.openDeleteModal = action.payload;
     },
     setOpenEditModal: (state, action) => {
-      state.openEditModal = action.payload.open;
-      state.selectedProject = action.payload.project;
+      state.openEditModal = action.payload;
     },
   },
 });
@@ -68,7 +63,7 @@ export const {
   addElement,
   updateElement,
   deleteElement,
-  setSelectedElement,
+  setSelectedProject,
   setTable,
   emptyTable,
   setErrorResponse,

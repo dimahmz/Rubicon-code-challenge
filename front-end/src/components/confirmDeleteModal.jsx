@@ -1,12 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, ModalBody, ModalFooter, Spinner } from "reactstrap";
-import { setOpenDeleteModal } from "../store/projectsSice";
+import { setOpenDeleteModal } from "../store/appSlice";
 import { useState } from "react";
+// import Button from "../components/Button";
 
 function ModalFocusAfterClose({ handleDelete }) {
   const dispatch = useDispatch();
+
   const [isLoading, setIsLoading] = useState(false);
-  const open = useSelector((store) => store.projects.openDeleteModal);
+
+  const open = useSelector((store) => store.app.openDeleteModal);
 
   const close = () => dispatch(setOpenDeleteModal(false));
 
@@ -20,12 +23,14 @@ function ModalFocusAfterClose({ handleDelete }) {
   return (
     <div>
       <Modal isOpen={open}>
-        <ModalBody>Are sure you want to delete it ?</ModalBody>
+        <ModalBody>
+          <h5>Are sure you want to delete it ?</h5>
+        </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={close}>
+          <Button color="secondary" onClick={close}>
             Close
           </Button>
-          <Button color="primary" onClick={confirmDelete}>
+          <Button color="danger" onClick={confirmDelete}>
             {isLoading && <Spinner size="sm">Loading...</Spinner>}
             <span> Delete</span>
           </Button>

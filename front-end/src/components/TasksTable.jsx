@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedProject } from "../store/projectsSlice";
+import { setSelectedTask } from "../store/tasksSlice";
 import { setOpenDeleteModal, setOpenEditModal } from "../store/appSlice";
 import { getDayMonthYear } from "../utils/time";
 import { MdCalendarMonth, MdDelete, MdEdit } from "react-icons/md";
 import { Table } from "reactstrap";
 import "../assets/styles/table.scss";
 
-function ProjectsTable() {
-  const projects = useSelector((store) => store.projects.projects);
+function tasksTable() {
+  const tasks = useSelector((store) => store.tasks.tasks);
 
   const dispatch = useDispatch();
 
@@ -25,30 +25,30 @@ function ProjectsTable() {
         </tr>
       </thead>
       <tbody>
-        {projects.map((project, i) => (
+        {tasks.map((task, i) => (
           <tr key={i}>
-            <td className="label">{project.label}</td>
-            <td className="description">{project.description}</td>
+            <td className="label">{task.label}</td>
+            <td className="description">{task.description}</td>
             <td>
               <div className="element-date">
                 <MdCalendarMonth />
-                {getDayMonthYear(project.starting_date)}
+                {getDayMonthYear(task.starting_date)}
               </div>
             </td>
             <td>
               <div className="element-date">
                 <MdCalendarMonth />
-                {getDayMonthYear(project.ending_date)}
+                {getDayMonthYear(task.ending_date)}
               </div>
             </td>
             <td>
               <div className="created-at">
-                {getDayMonthYear(project.createdAt)}
+                {getDayMonthYear(task.createdAt)}
               </div>
             </td>
             <td>
               <div className="updated-at">
-                {getDayMonthYear(project.updatedAt)}
+                {getDayMonthYear(task.updatedAt)}
               </div>
             </td>
             <td>
@@ -56,13 +56,13 @@ function ProjectsTable() {
                 <MdEdit
                   onClick={() => {
                     dispatch(setOpenEditModal(true));
-                    dispatch(setSelectedProject(project));
+                    dispatch(setSelectedTask(task));
                   }}
                 />
                 <MdDelete
                   onClick={() => {
                     dispatch(setOpenDeleteModal(true));
-                    dispatch(setSelectedProject(project));
+                    dispatch(setSelectedTask(task));
                   }}
                 />
               </div>
@@ -74,4 +74,4 @@ function ProjectsTable() {
   );
 }
 
-export default ProjectsTable;
+export default tasksTable;

@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
-import { setErrorResponse } from "../store/projectsSice";
+import { setErrorResponse } from "../store/appSlice";
 
 function ModalFocusAfterClose() {
   const dispatch = useDispatch();
 
-  const response = useSelector((store) => store.projects.errorResponse);
+  const response = useSelector((store) => store.app.errorResponse);
 
   const toggle = () =>
     dispatch(
@@ -24,7 +23,7 @@ function ModalFocusAfterClose() {
           <p>{response.description}</p>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={toggle}>
+          <Button type="secondary" onClick={toggle}>
             Close
           </Button>
         </ModalFooter>

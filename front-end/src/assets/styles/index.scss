@@ -1,4 +1,10 @@
 @import "variables";
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: $body-bg;
 }
@@ -17,6 +23,18 @@ svg {
     background-color: $primary-color-darker !important;
   }
 }
+.app-button[type="submit"] {
+  color: #fff;
+  background-color: $primary-color !important;
+}
+.app-button[type="cancel"] {
+  color: #0f0d0d !important;
+  background-color: #fff !important;
+  &:hover {
+    background-color: #f2f2f2 !important;
+  }
+}
+
 // Form
 form {
   label::after {

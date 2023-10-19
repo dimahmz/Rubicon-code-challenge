@@ -4,7 +4,12 @@ import { BiPlus } from "react-icons/bi";
 import Button from "../components/Button";
 import "../assets/styles/formModal.scss";
 
-function CreateElementModal({ CustomHeader, children, onSubmitForm }) {
+function CreateElementModal({
+  CustomHeader,
+  children,
+  onSubmitForm,
+  btnLabel,
+}) {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -32,7 +37,7 @@ function CreateElementModal({ CustomHeader, children, onSubmitForm }) {
   return (
     <div>
       <div>
-        <Button label="Add project" onClick={toggle}>
+        <Button label={btnLabel} onClick={toggle}>
           <BiPlus style={{ fontSize: "23px", marginRight: "10px" }} />
         </Button>
       </div>
@@ -58,6 +63,8 @@ function CreateElementModal({ CustomHeader, children, onSubmitForm }) {
                 name="description"
                 type="textarea"
                 placeholder="Write a description..."
+                rows={5}
+                cols={10}
               />
             </ReactStrap.FormGroup>
             {children}
@@ -83,7 +90,7 @@ function CreateElementModal({ CustomHeader, children, onSubmitForm }) {
             </ReactStrap.FormGroup>
             {/* Footer */}
             <ReactStrap.ModalFooter>
-              <Button style={{ color: "#000" }} onClick={toggle}>
+              <Button type="cancel" onClick={toggle}>
                 Cancel
               </Button>
               <Button type="submit">

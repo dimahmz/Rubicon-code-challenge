@@ -1,14 +1,14 @@
-import axios from "../utils/axios";
+import axios from "../../utils/axios";
 
 const internalError = {
   success: false,
   title: "An error has occurred",
 };
 
-export default class Project {
-  static async getProjects() {
+export default class Task {
+  static async getTasks() {
     try {
-      const response = await axios.get("/projects");
+      const response = await axios.get("/tasks");
       return response.data;
     } catch (e) {
       if (e?.response?.data) {
@@ -17,9 +17,9 @@ export default class Project {
       return internalError;
     }
   }
-  static async createProject(project) {
+  static async createTask(task) {
     try {
-      const response = await axios.post("/projects", { ...project });
+      const response = await axios.post("/tasks", { ...task });
       return response.data;
     } catch (e) {
       if (e?.response?.data) {
@@ -28,9 +28,9 @@ export default class Project {
       return internalError;
     }
   }
-  static async deleteProject(id) {
+  static async deleteTask(id) {
     try {
-      const response = await axios.delete(`/projects/${id}`);
+      const response = await axios.delete(`/tasks/${id}`);
       return response.data;
     } catch (e) {
       if (e?.response?.data) {
@@ -40,13 +40,11 @@ export default class Project {
     }
   }
 
-  static async updateProject({ id, project }) {
-    console.log(project);
+  static async updateTask({ id, element }) {
     try {
-      const response = await axios.put(`/projects/${id}`, { ...project });
+      const response = await axios.put(`/tasks/${id}`, { ...element });
       return response.data;
     } catch (e) {
-      console.log(e);
       if (e?.response?.data) {
         return e.response.data;
       }
