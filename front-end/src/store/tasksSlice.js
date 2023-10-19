@@ -50,7 +50,6 @@ export const TasksSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const {
   addElement,
   updateElement,

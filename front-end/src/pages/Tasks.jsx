@@ -28,7 +28,6 @@ function TasksPage() {
   const selectedProjectID = useSelector(
     (store) => store.tasks.seletedProjectID
   );
-  console.log(selectedTask);
 
   const [isloading, setIsLoading] = useState(false);
 

@@ -2,18 +2,13 @@
 
 table.data-table {
   max-width: $table-max-w;
-  margin: 50px auto;
+  margin: 30px auto 60px;
   border-collapse: separate;
   border-spacing: 0 10px;
   color: $sm-text-color !important;
   font-size: 14px;
-  tr {
-    border-radius: 5px;
-    box-shadow: $table-row-shadow;
-    background-color: transparent;
-  }
+
   .table-header {
-    background-color: transparent;
     box-shadow: none;
   }
   th {
@@ -62,6 +57,13 @@ table.data-table {
       font-size: 20px;
       color: $primary-color;
     }
+  }
+  // table rows border raduis
+  td:first-child {
+    border-radius: 10px 0px 0px 10px;
+  }
+  td:last-child {
+    border-radius: 0px 10px 10px 0px;
   }
 }
 

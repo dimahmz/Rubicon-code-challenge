@@ -20,7 +20,6 @@ export const AppSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { setErrorResponse, setOpenDeleteModal, setOpenEditModal } =
   AppSlice.actions;
 

@@ -58,7 +58,6 @@ export const ProjectsSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const {
   addElement,
   updateElement,

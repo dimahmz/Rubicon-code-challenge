@@ -8,7 +8,7 @@
 }
 
 #nav-bar {
-  margin: 60px auto;
+  margin: 50px auto 30px;
   display: flex;
   justify-items: center;
   gap: 20px;
@@ -17,7 +17,7 @@
 
 .create-item-header {
   max-width: $table-max-w;
-  margin: auto;
+  margin: 0 auto;
   display: flex;
   justify-content: end;
 }
