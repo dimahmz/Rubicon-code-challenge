@@ -28,7 +28,7 @@ function TasksPage() {
   const selectedProjectID = useSelector(
     (store) => store.tasks.seletedProjectID
   );
-  console.log(selectedProjectID);
+  console.log(selectedTask);
 
   const [isloading, setIsLoading] = useState(false);
 
@@ -139,9 +139,7 @@ function TasksPage() {
             type="select"
             required
             onChange={(e) => dispatch(setSelectedProjectID(e.target.value))}
-            defaultValue={
-              selectedTask?.project?._id ? selectedTask?.project?._id : ""
-            }
+            defaultValue={selectedProjectID}
           >
             <option value="">Select a project...</option>
             {projects.map((project, i) => (

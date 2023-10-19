@@ -48,7 +48,7 @@ function CreateElementModal({
         <ReactStrap.ModalBody>
           <ReactStrap.Form onSubmit={submitForm}>
             <ReactStrap.FormGroup>
-              <ReactStrap.Label for="label">Valid input</ReactStrap.Label>
+              <ReactStrap.Label for="label">Label</ReactStrap.Label>
               <ReactStrap.Input
                 required
                 name="label"

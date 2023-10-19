@@ -8,6 +8,7 @@ import "../assets/styles/table.scss";
 
 function tasksTable() {
   const tasks = useSelector((store) => store.tasks.tasks);
+  console.log(tasks);
 
   const dispatch = useDispatch();
 

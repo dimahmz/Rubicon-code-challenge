@@ -55,7 +55,7 @@ function CreateElementModal({ children, onSubmitForm, selectedElement }) {
         <ModalBody>
           <Form onSubmit={submitForm}>
             <FormGroup>
-              <Label for="label">Valid input</Label>
+              <Label for="label">Label</Label>
               <Input
                 required
                 name="label"

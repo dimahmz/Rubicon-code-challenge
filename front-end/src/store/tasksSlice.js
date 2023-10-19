@@ -13,7 +13,7 @@ export const TasksSlice = createSlice({
       createdAt: "",
       updatedAt: "",
     },
-    seletedProjectID: null,
+    seletedProjectID: "",
   },
   reducers: {
     addElement: (state, action) => {
@@ -40,8 +40,9 @@ export const TasksSlice = createSlice({
       state.tasks = [];
     },
     setSelectedTask: (state, action) => {
+      console.log();
       state.selectedTask = action.payload;
-      state.seletedProjectID = action.payload.project?._id || null;
+      state.seletedProjectID = action.payload.project?._id || "";
     },
     setSelectedProjectID: (state, action) => {
       state.seletedProjectID = action.payload;

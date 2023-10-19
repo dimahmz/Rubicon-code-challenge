@@ -17,6 +17,14 @@
   }
 }
 
-label {
-  font-weight: 500;
+form {
+  label {
+    font-weight: 500;
+  }
+  label::after {
+    content: "*";
+  }
+  input[type="date"] {
+    cursor: text;
+  }
 }
