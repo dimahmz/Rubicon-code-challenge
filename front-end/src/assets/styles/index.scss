@@ -26,6 +26,9 @@ svg {
 .app-button[type="submit"] {
   color: #fff;
   background-color: $primary-color !important;
+  &:hover {
+    background-color: $primary-color-darker !important;
+  }
 }
 .app-button[type="cancel"] {
   color: #0f0d0d !important;

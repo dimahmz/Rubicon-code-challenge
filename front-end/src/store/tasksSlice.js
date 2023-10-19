@@ -13,6 +13,7 @@ export const TasksSlice = createSlice({
       createdAt: "",
       updatedAt: "",
     },
+    seletedProjectID: null,
   },
   reducers: {
     addElement: (state, action) => {
@@ -40,6 +41,10 @@ export const TasksSlice = createSlice({
     },
     setSelectedTask: (state, action) => {
       state.selectedTask = action.payload;
+      state.seletedProjectID = action.payload.project?._id || null;
+    },
+    setSelectedProjectID: (state, action) => {
+      state.seletedProjectID = action.payload;
     },
   },
 });
@@ -50,6 +55,7 @@ export const {
   updateElement,
   deleteElement,
   setSelectedTask,
+  setSelectedProjectID,
   setTable,
   emptyTable,
 } = TasksSlice.actions;

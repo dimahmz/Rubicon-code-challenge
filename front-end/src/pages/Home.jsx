@@ -9,7 +9,7 @@ function HomePage() {
       <p>click on the button to explore it</p>
       <div>
         <Link to="/projects">
-          <Button label="Explore" />
+          <Button type="submit" label="Explore" />
         </Link>
       </div>
     </main>

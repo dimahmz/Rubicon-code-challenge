@@ -12,6 +12,7 @@ import {
   addElement,
   deleteElement,
   updateElement,
+  setSelectedProjectID,
   setTable,
 } from "../store/tasksSlice";
 import Task from "../utils/APIs/Task";
@@ -22,13 +23,16 @@ function TasksPage() {
 
   const [projects, setProjects] = useState([]);
 
-  const [SeletedProjectID, setSeletedProjectID] = useState(null);
+  const selectedTask = useSelector((store) => store.tasks.selectedTask);
+
+  const selectedProjectID = useSelector(
+    (store) => store.tasks.seletedProjectID
+  );
+  console.log(selectedProjectID);
 
   const [isloading, setIsLoading] = useState(false);
 
   const Tasks = useSelector((store) => store.tasks.tasks);
-
-  const selectedTask = useSelector((store) => store.tasks.selectedTask);
 
   // fetch Tasks
   async function fetchTasks() {
@@ -52,7 +56,7 @@ function TasksPage() {
   }, []);
 
   async function handleCreateTask(newTask) {
-    const $newTask = { ...newTask, project_id: SeletedProjectID };
+    const $newTask = { ...newTask, project_id: selectedProjectID };
     const response = await Task.createTask($newTask);
     if (response.success) {
       dispatch(addElement(response.payload));
@@ -69,9 +73,13 @@ function TasksPage() {
   }
 
   async function handleUpdateTask(editedTask) {
-    const response = await Task.updateTask(editedTask);
+    const $editedTask = {
+      element: { ...editedTask.element, project_id: selectedProjectID },
+    };
+    $editedTask.id = editedTask.id;
+    const response = await Task.updateTask($editedTask);
     if (response.success) {
-      dispatch(updateElement(editedTask));
+      dispatch(updateElement(response.payload));
     } else {
       dispatch(
         setErrorResponse({
@@ -106,7 +114,7 @@ function TasksPage() {
               palceholder="Select project.."
               type="select"
               required
-              onChange={(e) => setSeletedProjectID(e.target.value)}
+              onChange={(e) => dispatch(setSelectedProjectID(e.target.value))}
             >
               <option value="">Select a project...</option>
               {projects.map((project, i) => (
@@ -123,7 +131,27 @@ function TasksPage() {
       <EditElementModal
         onSubmitForm={handleUpdateTask}
         selectedElement={selectedTask}
-      />
+      >
+        <FormGroup>
+          <Label>Project</Label>
+          <Input
+            palceholder="Select project.."
+            type="select"
+            required
+            onChange={(e) => dispatch(setSelectedProjectID(e.target.value))}
+            defaultValue={
+              selectedTask?.project?._id ? selectedTask?.project?._id : ""
+            }
+          >
+            <option value="">Select a project...</option>
+            {projects.map((project, i) => (
+              <option key={i} b value={project._id}>
+                {project.label}
+              </option>
+            ))}
+          </Input>
+        </FormGroup>
+      </EditElementModal>
       {isloading ? (
         <div className="table-loader">
           <Spinner color="primary">loading ...</Spinner>
