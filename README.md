@@ -43,10 +43,6 @@ Set it to localhost or your local IP address.
 
 Ensure the port matches the one used in the Back-end (default: 8000).
 
-Change .env.example to .env
-
-and the variable VITE_BACK_END_API to localhost or your local ip address and the port should be 8000 or with the port you changed in back-end
-
 **install the depedencies**
 
 `npm i`
