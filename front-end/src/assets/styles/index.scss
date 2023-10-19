@@ -1,0 +1,25 @@
+@import "variables";
+body {
+  background: $body-bg;
+}
+svg {
+  cursor: pointer;
+}
+.app-button {
+  color: $primary-color;
+  background-color: #fff;
+  border: none;
+  box-shadow: $button-shadow;
+  padding: 5px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  &:hover {
+    background-color: $primary-color-darker !important;
+  }
+}
+// Form
+form {
+  label::after {
+    content: "*";
+  }
+}

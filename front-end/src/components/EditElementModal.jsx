@@ -51,7 +51,7 @@ function CreateElementModal({ children, onSubmitForm, selectedElement }) {
   return (
     <div>
       <Modal isOpen={open} toggle={close}>
-        <ModalHeader toggle={close}>header</ModalHeader>
+        <ModalHeader toggle={close}>Edit</ModalHeader>
         <ModalBody>
           <Form onSubmit={submitForm}>
             <FormGroup>

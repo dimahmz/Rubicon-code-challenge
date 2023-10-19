@@ -1,22 +1,22 @@
 import { NavLink, Outlet } from "react-router-dom";
-import "./navBarLayout.scss";
-import { Button } from "reactstrap";
+import "../../assets/styles/navBarLayout.scss";
+import Button from "../../components/Button";
 
 function NavBarLayout() {
   return (
     <div>
-      <nav>
+      <nav id="nav-bar">
         <NavLink
           to="projects"
           className={({ isActive }) => (isActive ? "activeLink" : "")}
         >
-          <Button>Projects</Button>
+          <Button label="Projects" />
         </NavLink>
         <NavLink
           to="tasks"
           className={({ isActive }) => (isActive ? "activeLink" : "")}
         >
-          <button>Tasks</button>
+          <Button style={{ padding: "20px" }} label="Tasks" />
         </NavLink>
       </nav>
       <section>

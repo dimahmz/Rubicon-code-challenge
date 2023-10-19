@@ -1,0 +1,19 @@
+@import "variables";
+
+.welcome-section {
+  text-align: center;
+
+  .welcome-title {
+    margin-top: 100px;
+    margin-bottom: 50px;
+    font-weight: 700;
+    color: $primary-color;
+  }
+  p {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  button {
+    margin-top: 40px;
+  }
+}

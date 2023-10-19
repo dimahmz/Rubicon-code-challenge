@@ -1,0 +1,13 @@
+.header-modal {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  .modal-title {
+    display: flex;
+    column-gap: 10px;
+  }
+  .titles {
+    display: flex;
+    row-gap: 5px;
+  }
+}

@@ -1,0 +1,23 @@
+@import "variables";
+
+.activeLink {
+  * {
+    background-color: $primary-color !important;
+    color: #fff !important;
+  }
+}
+
+#nav-bar {
+  margin: 60px auto;
+  display: flex;
+  justify-items: center;
+  gap: 20px;
+  max-width: $table-max-w;
+}
+
+.create-item-header {
+  max-width: $table-max-w;
+  margin: auto;
+  display: flex;
+  justify-content: end;
+}

@@ -34,7 +34,7 @@ export const ProjectsSlice = createSlice({
     deleteElement: (state, action) => {
       const $project = action.payload;
       const filtredProjects = state.projects.filter(
-        (project) => project._id == $project._id
+        (project) => project._id != $project._id
       );
       state.projects = filtredProjects;
     },

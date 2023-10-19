@@ -1,19 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import * as ReactStrap from "reactstrap";
 import { BiPlus } from "react-icons/bi";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Form,
-  Label,
-  Input,
-  FormGroup,
-  Spinner,
-} from "reactstrap";
+import Button from "../components/Button";
+import "../assets/styles/formModal.scss";
 
-function CreateElementModal({ children, onSubmitForm }) {
+function CreateElementModal({ CustomHeader, children, onSubmitForm }) {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -40,61 +31,71 @@ function CreateElementModal({ children, onSubmitForm }) {
   }
   return (
     <div>
-      <Button color="danger" onClick={toggle}>
-        <BiPlus />
-        add Project
-      </Button>
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>header</ModalHeader>
-        <ModalBody>
-          <Form onSubmit={submitForm}>
-            <FormGroup>
-              <Label for="label">Valid input</Label>
-              <Input required name="label" placeholder="Write a label..." />
-            </FormGroup>
-            <FormGroup>
-              <Label for="description">Description</Label>
-              <Input
+      <div>
+        <Button label="Add project" onClick={toggle}>
+          <BiPlus style={{ fontSize: "23px", marginRight: "10px" }} />
+        </Button>
+      </div>
+      <ReactStrap.Modal isOpen={modal} toggle={toggle}>
+        {/* header */}
+        <CustomHeader closeModal={toggle} />
+        {/* Body */}
+        <ReactStrap.ModalBody>
+          <ReactStrap.Form onSubmit={submitForm}>
+            <ReactStrap.FormGroup>
+              <ReactStrap.Label for="label">Valid input</ReactStrap.Label>
+              <ReactStrap.Input
+                required
+                name="label"
+                placeholder="Write a label..."
+              />
+            </ReactStrap.FormGroup>
+            <ReactStrap.FormGroup>
+              <ReactStrap.Label for="description">Description</ReactStrap.Label>
+              <ReactStrap.Input
                 required
                 id="description"
                 name="description"
                 type="textarea"
                 placeholder="Write a description..."
               />
-            </FormGroup>
+            </ReactStrap.FormGroup>
             {children}
-            <FormGroup>
-              <Label for="started_at">Started at</Label>
-              <Input
+            <ReactStrap.FormGroup>
+              <ReactStrap.Label for="started_at">Started at</ReactStrap.Label>
+              <ReactStrap.Input
                 required
                 id="started_at"
                 name="started_at"
                 placeholder="pick a date..."
                 type="date"
               />
-            </FormGroup>
-            <FormGroup>
-              <Label for="ended_at">Ended at</Label>
-              <Input
+            </ReactStrap.FormGroup>
+            <ReactStrap.FormGroup>
+              <ReactStrap.Label for="ended_at">Ended at</ReactStrap.Label>
+              <ReactStrap.Input
                 required
                 id="ended_at"
                 name="ended_at"
                 placeholder="pick a date..."
                 type="date"
               />
-            </FormGroup>
-            <ModalFooter>
-              <Button color="primary" type="submit">
-                {isLoading && <Spinner size="sm">Loading...</Spinner>}
-                <span>&nbsp;Save</span>
-              </Button>
-              <Button color="secondary" onClick={toggle}>
+            </ReactStrap.FormGroup>
+            {/* Footer */}
+            <ReactStrap.ModalFooter>
+              <Button style={{ color: "#000" }} onClick={toggle}>
                 Cancel
               </Button>
-            </ModalFooter>
-          </Form>
-        </ModalBody>
-      </Modal>
+              <Button type="submit">
+                {isLoading && (
+                  <ReactStrap.Spinner size="sm">Loading...</ReactStrap.Spinner>
+                )}
+                <span>&nbsp;Save</span>
+              </Button>
+            </ReactStrap.ModalFooter>
+          </ReactStrap.Form>
+        </ReactStrap.ModalBody>
+      </ReactStrap.Modal>
     </div>
   );
 }
