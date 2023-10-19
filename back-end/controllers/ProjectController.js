@@ -33,7 +33,6 @@ class ProjectController {
         },
         { new: true }
       );
-      console.log($project);
       if (!$project) {
         return res
           .status(404)

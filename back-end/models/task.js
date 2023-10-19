@@ -33,7 +33,7 @@ function validate(project) {
     description: Joi.string().required().label("description"),
     ending_date: Joi.date().required().label("ending date"),
     starting_date: Joi.date().required().label("starting date"),
-    project_id: Joi.string().required().label("project id"),
+    project_id: Joi.string().required().label("project"),
   });
   return schema.validate(project);
 }

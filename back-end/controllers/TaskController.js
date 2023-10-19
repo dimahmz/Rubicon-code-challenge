@@ -23,27 +23,23 @@ class TaskController {
     const { label, description, starting_date, ending_date, project_id } =
       req.body;
     try {
-      const $task = await Task.replaceOne(
+      const $task = await Task.findByIdAndUpdate(
+        req.params.id,
         {
-          _id: req.params.id,
+          label,
+          description,
+          starting_date,
+          ending_date,
+          project: project_id,
         },
-        {
-          label,
-          description,
-          starting_date,
-          ending_date,
-          project_id,
-        }
-      );
-      res.send(
-        Responses.create(true, "Task has been created", "", {
-          label,
-          description,
-          starting_date,
-          ending_date,
-          project_id,
-        })
-      );
+        { new: true }
+      ).populate("project");
+      if (!$task) {
+        return res
+          .status(404)
+          .send(Responses.create(false, "task doesn't exist"));
+      }
+      res.send(Responses.create(true, "Task has been created", "", $task));
     } catch (e) {
       console.error(e.message);
       return res.status(404).send(Responses.serverError());
